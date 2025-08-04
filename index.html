@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Link Copy Demo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>ลิงก์ไปยัง Google</h1>
+
+  <!-- ลิงก์ (คลิกเพื่อไปยัง Google ได้เลย) -->
+  <p>
+    <a href="https://www.google.com" target="_blank" rel="noopener">
+      ไปที่เว็บไซต์ Google
+    </a>
+  </p>
+
+  <!-- กล่องข้อความแสดง URL พร้อมปุ่มคัดลอก -->
+  <label for="google-link">คัดลอกลิงก์ Google:</label>
+  <input type="text" id="google-link" value="https://www.google.com" readonly>
+  <button id="copy-btn">คัดลอกลิงก์</button>
+
+  <script>
+    document.getElementById('copy-btn').addEventListener('click', function() {
+      const input = document.getElementById('google-link');
+      input.select();
+      input.setSelectionRange(0, input.value.length);
+      navigator.clipboard.writeText(input.value)
+        .then(() => {
+          alert('คัดลอกลิงก์เรียบร้อย: ' + input.value);
+        })
+        .catch(err => {
+          console.error('เกิดข้อผิดพลาดในการคัดลอก: ', err);
+        });
+    });
+  </script>
+</body>
+</html>
